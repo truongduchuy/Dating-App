@@ -14,6 +14,7 @@ namespace DatingApp_API.Data
             _context = context;
 
         }
+        
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -27,16 +28,16 @@ namespace DatingApp_API.Data
             return user;
         }
 
-        public async Task<bool> Login(string username, string password) {
+        public async Task<User> Login(string username, string password) {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
 
             if(user == null) 
-                return false;
+                return null;
             
             if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) {
-                return false;
+                return null;
             }
-            return true;
+            return user;
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -51,7 +52,7 @@ namespace DatingApp_API.Data
             return true;
         }
 
-        public async Task<bool> userExists(string username) {
+        public async Task<bool> UserExists(string username) {
             if(await _context.Users.AnyAsync(x => x.Username == username))
                 return true;
             return false;
@@ -63,11 +64,6 @@ namespace DatingApp_API.Data
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
-        }
-
-        public Task<bool> UserExists(string username)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
