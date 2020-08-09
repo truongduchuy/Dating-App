@@ -8,23 +8,18 @@ import { ValueComponent } from './value/value.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ErrorExterceptorProvider } from './_service/error-interceptor';
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      ValueComponent,
-      NavComponent,
-      HomeComponent,
-      RegisterComponent
-   ],
-   imports: [
-      BrowserModule,
-      HttpClientModule,
-      FormsModule
-   ],
-   providers: [],
-   bootstrap: [
-      AppComponent
-   ]
+  declarations: [
+    AppComponent,
+    ValueComponent,
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+  ],
+  imports: [BrowserModule, HttpClientModule, FormsModule],
+  providers: [ErrorExterceptorProvider],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
