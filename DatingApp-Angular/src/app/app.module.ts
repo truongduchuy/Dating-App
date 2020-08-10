@@ -9,6 +9,7 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorExterceptorProvider } from './_service/error-interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ErrorExterceptorProvider } from './_service/error-interceptor';
     HomeComponent,
     RegisterComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, HttpClientModule, FormsModule, NgbModule],
   providers: [ErrorExterceptorProvider],
   bootstrap: [AppComponent],
 })
