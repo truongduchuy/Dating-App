@@ -12,7 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorExterceptorProvider } from './_service/error-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListComponent } from './list/list.component';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { ShowUserNamePipe } from './pipes/showUserName.pipe';
@@ -28,6 +29,7 @@ import { ShowUserNamePipe } from './pipes/showUserName.pipe';
     MemberListComponent,
     MessagesComponent,
     ShowUserNamePipe,
+    MemberCardComponent
   ],
   imports: [
     BrowserModule,
