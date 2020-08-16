@@ -17,6 +17,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { ShowUserNamePipe } from './pipes/showUserName.pipe';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ShowUserNamePipe } from './pipes/showUserName.pipe';
     MemberListComponent,
     MessagesComponent,
     ShowUserNamePipe,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,13 @@ import { ShowUserNamePipe } from './pipes/showUserName.pipe';
     FormsModule,
     NgbModule,
     RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token'),
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: ['localhost:5000/api/auth']
+      }
+    })
   ],
   providers: [ErrorExterceptorProvider],
   bootstrap: [AppComponent],
