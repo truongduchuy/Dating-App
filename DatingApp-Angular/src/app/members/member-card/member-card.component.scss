@@ -12,4 +12,19 @@
 
 .card-img-wrapper {
     overflow: hidden;
+    position: relative;
+
+    &:hover ul {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+ul {
+    transition: all .4s ease-out;
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    opacity: 0;
 }
