@@ -21,6 +21,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { NgxGalleryModule } from 'ngx-gallery-9';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { MemberListResolver } from './_resolvers/member-list.resolver';
     MessagesComponent,
     ShowUserNamePipe,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,15 +43,20 @@ import { MemberListResolver } from './_resolvers/member-list.resolver';
     FormsModule,
     NgbModule,
     RouterModule.forRoot(appRoutes),
+    NgxGalleryModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('token'),
         allowedDomains: ['localhost:5000'],
-        disallowedRoutes: ['localhost:5000/api/auth']
-      }
-    })
+        disallowedRoutes: ['localhost:5000/api/auth'],
+      },
+    }),
   ],
-  providers: [ErrorExterceptorProvider, MemberDetailResolver, MemberListResolver],
+  providers: [
+    ErrorExterceptorProvider,
+    MemberDetailResolver,
+    MemberListResolver,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

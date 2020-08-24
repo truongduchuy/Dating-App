@@ -26,6 +26,7 @@
     "bootstrap": "^4.5.1",
     "bootswatch": "^4.5.1",
     "font-awesome": "^4.7.0",
+    "ngx-gallery-9": "^1.0.6",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
