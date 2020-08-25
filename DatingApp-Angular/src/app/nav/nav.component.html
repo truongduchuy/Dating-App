@@ -18,7 +18,7 @@
         ngbDropdownToggle>Welcome {{'unique_name' | showUserName }} </a>
 
       <div class="dropdown-menu" ngbDropdownMenu>
-        <a href="#" class="dropdown-item"><i class="fa fa-user"></i>Edit Profile</a>
+        <a [routerLink]="['member/edit']" class="dropdown-item"><i class="fa fa-user"></i>Edit Profile</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
       </div>
