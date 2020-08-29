@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { NgForm } from '@angular/forms';
 import { AlertifyService } from 'src/app/_service/alertify.service';
+import { UserService } from 'src/app/_service/user.service';
 
 @Component({
   selector: 'app-member-edit',
@@ -15,12 +16,16 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
-    if(this.editForm.dirty) {
+    if (this.isFormDirty()) {
       $event.returnValue = true;
     }
   }
 
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private alertify: AlertifyService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
@@ -30,8 +35,10 @@ export class MemberEditComponent implements OnInit {
   }
 
   updateUser() {
-    this.alertify.success('saved successfully!')
-    this.oldUser = {...this.user}
+    this.userService.updateUser(this.user.id, this.user).subscribe((res) => {
+      this.alertify.success('saved successfully!');
+      this.oldUser = { ...this.user };
+    });
   }
 
   isFormDirty(): boolean {

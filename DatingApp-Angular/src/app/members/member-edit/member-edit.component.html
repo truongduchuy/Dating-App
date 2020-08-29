@@ -53,11 +53,15 @@
                   <textarea name="interests" rows="6" class="form-control" [(ngModel)]="user.interests">
                   </textarea>
                   <h4>location Details:</h4>
-                  <div class="form-inline">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
-                    <label for="country">Country</label>
-                    <input type="text" class="form-control" name="country" [(ngModel)]="user.city">
+                  <div class="location-details">
+                    <div class="d-flex mb-3">
+                      <label for="city">City</label>
+                      <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
+                    </div>
+                    <div  class="d-flex">
+                      <label for="country">Country</label>
+                      <input type="text" class="form-control" name="country" [(ngModel)]="user.country">
+                    </div>
                   </div>
                 </form>
               </div>
