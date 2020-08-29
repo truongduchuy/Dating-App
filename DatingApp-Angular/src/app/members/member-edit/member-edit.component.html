@@ -4,8 +4,8 @@
       <h1>Your Profile</h1>
     </div>
     <div class="col-sm-8">
-      <div class="alert alert-info">
-      <p><strong>Information:</strong> You have made changes. Any unsaved changes will be lost!</p>
+      <div class="alert alert-info" *ngIf="isFormDirty()">
+        <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
             <p>{{ user.created }}</p>
           </div>
           <div class="card-footer">
-            <button class="btn btn-success btn-block">Save Changes</button>
+            <button [disabled]="!isFormDirty()" form="editForm" class="btn btn-success btn-block">Save Changes</button>
           </div>
         </div>
       </div>
@@ -42,15 +42,15 @@
           <ngb-tab title="Edit Profile" class="p-3">
             <ng-template ngbTabContent>
               <div class="p-3">
-                <form>
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
                   <h4>Description</h4>
-                  <textarea name="introduction" cols="6" rows="4" class="form-control" [(ngModel)]="user.introduction">
+                  <textarea name="introduction" rows="6" class="form-control" [(ngModel)]="user.introduction">
                   </textarea>
                   <h4>Looking For</h4>
-                  <textarea name="lookingFor" cols="6" rows="4" class="form-control" [(ngModel)]="user.lookingFor">
+                  <textarea name="lookingFor" rows="6" class="form-control" [(ngModel)]="user.lookingFor">
                   </textarea>
                   <h4>Interests</h4>
-                  <textarea name="interests" cols="6" rows="4" class="form-control" [(ngModel)]="user.interests">
+                  <textarea name="interests" rows="6" class="form-control" [(ngModel)]="user.interests">
                   </textarea>
                   <h4>location Details:</h4>
                   <div class="form-inline">
