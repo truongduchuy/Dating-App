@@ -12,3 +12,22 @@ img.img-thumbnail {
     background-color: #fff;
     border-top: none;
 }
+
+#editForm {
+    textarea {
+        margin-bottom: 20px;
+    }
+
+    .location-details {
+        > div {
+            display: flex;
+            align-items: center;
+        }
+        label {
+            max-width: 100px;
+            width: 100px;
+            margin: 0;
+        }
+    }
+}
+
