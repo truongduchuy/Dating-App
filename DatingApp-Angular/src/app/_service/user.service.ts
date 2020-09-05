@@ -23,4 +23,8 @@ export class UserService {
   updateUser(id, user: User) {
     return this.http.put(this.baseUrl + 'users/' + id, user);
   }
+
+  uploadPhoto(id, formData) {
+    return this.http.post(this.baseUrl + 'users/' + id + '/photos', formData);
+  }
 }
