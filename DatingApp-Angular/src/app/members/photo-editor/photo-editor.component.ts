@@ -56,4 +56,15 @@ export class PhotoEditorComponent implements OnInit {
         }
       );
   }
+
+  deletePhoto(id: number) {
+    this.alertify.confirm('Are you sure to delete', () => {
+      this.userService
+        .deletePhoto(this.authService.decodedToken?.nameid, id)
+        .subscribe((res) => {
+          console.log('res', res);
+          this.photos = this.photos.filter((photo) => photo.id !== id);
+        });
+    });
+  }
 }
