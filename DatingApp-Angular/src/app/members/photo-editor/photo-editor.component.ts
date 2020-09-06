@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Photo } from 'src/app/_models/photo';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/_service/auth.service';
 import { UserService } from 'src/app/_service/user.service';
+import { AlertifyService } from 'src/app/_service/alertify.service';
 
 @Component({
   selector: 'app-photo-editor',
@@ -11,10 +12,12 @@ import { UserService } from 'src/app/_service/user.service';
 })
 export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
+  @Output() getMemberPhotoChange = new EventEmitter();
   file;
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertify: AlertifyService
   ) {}
 
   ngOnInit() {}
@@ -31,5 +34,21 @@ export class PhotoEditorComponent implements OnInit {
   }
   handleFileChange(event: any) {
     this.file = event.target.files[0];
+  }
+
+  setMainPhoto(photo: Photo) {
+    this.userService
+      .setMainPhoto(this.authService.decodedToken.nameid, photo.id)
+      .subscribe(
+        () => {
+          const currentMainPhoto = this.photos.find((_) => _.isMain);
+          currentMainPhoto.isMain = false;
+          photo.isMain = true;
+          this.getMemberPhotoChange.emit(photo.url);
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
   }
 }
