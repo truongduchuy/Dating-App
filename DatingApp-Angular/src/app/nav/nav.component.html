@@ -14,6 +14,9 @@
       </li>
     </ul>
     <div class="dropdown" *ngIf="loggedIn()" ngbDropdown>
+      <span class="mr-2">
+        <img src="{{ photoUrl}}" alt="photo" />
+      </span>
       <a class="dropdown-toggle text-light"
         ngbDropdownToggle>Welcome {{'unique_name' | showUserName }} </a>
 
