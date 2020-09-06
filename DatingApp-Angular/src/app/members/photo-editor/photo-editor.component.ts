@@ -27,7 +27,7 @@ export class PhotoEditorComponent implements OnInit {
     formData.append('File', this.file);
 
     this.userService
-      .uploadPhoto(this.authService.decodedToken.nameid, formData)
+      .uploadPhoto(this.authService.decodedToken?.nameid, formData)
       .subscribe((res: Photo) => {
         this.photos.push(res);
       });
@@ -38,13 +38,18 @@ export class PhotoEditorComponent implements OnInit {
 
   setMainPhoto(photo: Photo) {
     this.userService
-      .setMainPhoto(this.authService.decodedToken.nameid, photo.id)
+      .setMainPhoto(this.authService.decodedToken?.nameid, photo.id)
       .subscribe(
         () => {
           const currentMainPhoto = this.photos.find((_) => _.isMain);
           currentMainPhoto.isMain = false;
           photo.isMain = true;
-          this.getMemberPhotoChange.emit(photo.url);
+          this.authService.changePhotoUrl(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem(
+            'user',
+            JSON.stringify(this.authService.currentUser)
+          );
         },
         (error) => {
           this.alertify.error(error);

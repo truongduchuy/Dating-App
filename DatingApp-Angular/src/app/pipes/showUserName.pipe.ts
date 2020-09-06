@@ -7,6 +7,6 @@ import { AuthService } from '../_service/auth.service';
 export class ShowUserNamePipe implements PipeTransform {
   constructor(private authService: AuthService) {}
   transform(username, args?: any): any {
-    return  this.authService.decodedToken[username]; 
+    return  this.authService.decodedToken?.[username]; 
   }
 }
