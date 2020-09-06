@@ -55,4 +55,9 @@ export class MemberEditComponent implements OnInit {
       interests: user.interests?.trim(),
     };
   }
+
+  updateMainPhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
+    this.oldUser = { ...this.user };
+  }
 }
