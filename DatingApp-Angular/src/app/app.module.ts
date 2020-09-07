@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -57,6 +57,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
         disallowedRoutes: ['localhost:5000/api/auth'],
       },
     }),
+    ReactiveFormsModule
   ],
   providers: [
     ErrorExterceptorProvider,
