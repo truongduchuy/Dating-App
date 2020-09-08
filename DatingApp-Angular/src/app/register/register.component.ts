@@ -1,7 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_service/auth.service';
 import { AlertifyService } from '../_service/alertify.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -14,22 +18,30 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private fb: FormBuilder
   ) {}
   @Output() toggleRegister = new EventEmitter();
 
   ngOnInit() {
-    this.registerform = new FormGroup(
+    this.createRegisterForm();
+  }
+
+  createRegisterForm() {
+    this.registerform = this.fb.group(
       {
-        username: new FormControl('Hello', Validators.required),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(8),
-        ]),
-        confirmPassword: new FormControl('', Validators.required),
+        username: ['', Validators.required],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(8),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
       },
-      this.passwordMatchValidator
+      { validator: this.passwordMatchValidator }
     );
   }
 
