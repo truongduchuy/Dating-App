@@ -14,7 +14,7 @@ import {
 })
 export class RegisterComponent implements OnInit {
   user: any = {};
-  registerform: FormGroup;
+  registerForm: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -28,9 +28,14 @@ export class RegisterComponent implements OnInit {
   }
 
   createRegisterForm() {
-    this.registerform = this.fb.group(
+    this.registerForm = this.fb.group(
       {
+        gender: ['male'],
         username: ['', Validators.required],
+        knownAs: ['', Validators.required],
+        dateOfBirth: [null, Validators.required],
+        city: ['', Validators.required],
+        country: ['', Validators.required],
         password: [
           '',
           [
@@ -58,7 +63,7 @@ export class RegisterComponent implements OnInit {
     //     this.alertify.error(error);
     //   }
     // );
-    console.log(this.registerform.value);
+    console.log(this.registerForm.value);
   }
 
   cancel() {
